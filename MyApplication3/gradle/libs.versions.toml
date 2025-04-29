@@ -1,0 +1,33 @@
+[versions]
+agp = "8.9.1"
+hiltAndroid = "2.56.1"
+kotlin = "2.1.20"
+activityVersion = "1.10.1"
+hilt = "2.56.1"
+kspVersion = "2.1.20-1.0.31"
+composeLifecycleVersion = "2.8.7"
+composeMaterial3Version = "1.4.0-alpha12"
+composeVersion = "1.8.0-rc03"
+
+[libraries]
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
+composeMaterial3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3Version" }
+composeViewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "composeLifecycleVersion" }
+composeActivity = { module = "androidx.activity:activity-compose", version.ref = "activityVersion" }
+composeUiTest = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "composeVersion" }
+composeTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "composeVersion" }
+
+[bundles]
+
+compose = ["composeViewModel", "composeMaterial3", "composeActivity"]
+composeTest = ["composeUiTest"]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
+kspPlugin = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
+
+
