@@ -16,7 +16,7 @@ class MyComposeTest {
     val composeTestRule = createComposeRule()
 
     @Test
-    fun myTest() {
+    fun errorWhenReplaceTheOldField() {
         composeTestRule.setContent {
             MainContent(viewModel = MyViewmodel())
         }
@@ -45,7 +45,8 @@ class MyComposeTest {
         composeTestRule
             .onNodeWithTag("component3").assertTextContains("test3")
 
-        composeTestRule.onNodeWithTag("component1").performTextReplacement("test11")
+        composeTestRule.onNodeWithTag("component1")
+            .performTextReplacement("test11")
         composeTestRule
             .onNodeWithTag("component1").assertTextContains("test11")
         composeTestRule
@@ -80,7 +81,7 @@ class MyComposeTest {
     }
 
     @Test
-    fun myTest2() {
+    fun errorWhenReplaceTheSameField() {
 
         composeTestRule.setContent {
             MainContent(viewModel = MyViewmodel())
@@ -127,28 +128,28 @@ class MyComposeTest {
 
     }
 
-    /*
-    checkManualAgeVerificationMonthValid()
-                inputMonth("0")
-                checkManualAgeVerificationMonthValid(false)
+    @Test
+    fun testCleaningTheFieldBetweenAddNew() {
 
-                inputMonth("3")
-                checkManualAgeVerificationMonthValid()
-                checkManualAgeVerificationDayValid()
+        composeTestRule.setContent {
+            MainContent(viewModel = MyViewmodel())
+        }
 
-                inputDay("40")
-                checkManualAgeVerificationDayValid(false)
-                inputDay("10")
-                checkManualAgeVerificationDayValid()
-                checkManualAgeVerificationYearValid()
+        composeTestRule.onNodeWithTag("component1").assertExists()
+        composeTestRule.onNodeWithTag("component2").assertExists()
+        composeTestRule.onNodeWithTag("component3").assertExists()
 
-                inputYear("1800")
-                checkManualAgeVerificationYearValid(false)
-                // include error to test the year valid number (when there are day, month and year right the dialog close automatically)
-                inputMonth("13")
-                inputYear("2000")
-                checkManualAgeVerificationYearValid()
-     */
+        composeTestRule.onNodeWithTag("component1").performTextReplacement("0000")
+        composeTestRule
+            .onNodeWithTag("component1").assertTextContains("0000")
 
+        composeTestRule.onNodeWithTag("component1").performTextClearance()
+        composeTestRule
+            .onNodeWithTag("component1").assertTextContains("")
+        composeTestRule.onNodeWithTag("component1").performTextReplacement("3")
+        composeTestRule
+            .onNodeWithTag("component1").assertTextContains("3")
+
+    }
 
 }
